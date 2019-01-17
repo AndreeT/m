@@ -1,0 +1,181 @@
+find music/ -type d |while read dir;do 
+    counttotal=$(find "$dir" -printf . | wc -c);
+    countdir=$(find "$dir"  -type d -printf . |wc -c);
+    countfile=$(find "$dir" -type f -printf . |wc -c);
+    countlink=$(find "$dir" -type l -printf . |wc -c);
+    echo "[Total:$counttotal][Dir:$countdir;File:$countfile;Links:$countlink]  : $dir "; 
+done
+========
+find foo -type d  -printf "d\n" -o -type f -printf "f\n" -type l -printf "l/n"| awk '/f/{f++}/d/{d++}/l/{l++}END{printf "%d directories, %d files, %symbolic links \n", d, f,l}
+=======
+echo
+echo "Media pe grupe: ";
+awk 'NR>1 {arr[$2] += $5; carr[$2]++ } END {for (a in arr) print "grupa " a " cu media " arr[a] / carr[a]}' data.txt
+echo
+echo "Media pe an: ";
+awk 'NR>1 {arr[$1] += $5; carr[$1]++ } END {for (a in arr) print "anul " a " cu media " arr[a] / carr[a]}' data.txt
+-	salvezi scriptul cu numele script.awk
+-	ca sa îl rulez deschid un terminal în directorul curent ?i execut comenzile:
+chmod +x script.sh
+./script.awk dosar1 dosar2
+-	fi?erul data.txt:
+1	10LF361	gigi	pop	10
+1	10LF361	geo	ionica   9
+2	10LF362	iuli	guru	 7
+2	10LF362	coco	rosu	 6
+2	10LF363	bea  	costea	 6
+
+======
+if(($# < 2 ))
+then
+echo "Error: too few parameters!"
+exit 1
+fi
+
+for file in "$@"
+do
+	if ! [[ -r $file ]]
+	then
+	echo "The file '$file' is not readable. It was just created!"
+	touch $file
+	else
+	echo "The file '$file' is readable. :)"
+	fi
+done
+
+
+for file in "$@"
+do
+	printf "\nName: $file"
+
+	lines=$(cat $file | wc -l)
+
+	printf "\nLines: $lines"
+
+	words=$(cat $file | wc -w)
+
+	printf "\nWords: $words\n";
+done
+=========
+
+if(($# < 2 ))
+then
+echo "Error: too few parameters!"
+exit 1
+fi
+
+for dir in "$@ - 1"
+do
+	if [[ -d $dir ]]
+	then
+		for file in "$dir"/*
+		do
+			if [[ -f $file && -r $file && -w $file && -x $file ]]
+			then
+				cp -v "$file" "$2"
+			fi
+		done
+	fi
+done
+=========
+if(($# < 2 ))
+then
+echo "Error: too few parameters!"
+exit 1
+fi
+
+for (( i=$#;i>0;i-- ))
+do
+	if [[ -f ${!i} ]]
+	then
+        		cat ${!i} >> concat.txt
+		echo "nu"
+	fi
+done
+echo "Concatenation completed successfully!"
+=======
+ps -ef | grep numeUser | awk '{ print $2 }' | sudo xargs kill -9
+
+sau vezi
+
+
+
+
+user=$1
+variable=$(ps -ef | awk -v patern="$user" '{if($1 ~ patern) {print $2}}')
+variablearray=($variable)
+for i in "${variablearray[@]}"
+do
+	echo $i
+done
+echo $user
+echo $variablearray
+=========
+if(($# < 2 ))
+then
+echo "Error: too few parameters!"
+exit 1
+fi
+
+for file in "$@"
+do
+	if ! [[ -r $file ]]
+	then
+	echo "The file '$file' is not readable. It was just created!"
+	touch $file
+	else
+	echo "The file '$file' is readable. :)"
+	fi
+done
+
+
+for file in "$@"
+do
+	printf "\nName: $file"
+
+	lines=$(cat $file | wc -l)
+
+	printf "\nLines: $lines"
+
+	words=$(cat $file | wc -w)
+
+	printf "\nWords: $words\n";
+done
+=========
+vector=("$@")
+if (( $# <= 1 ));then
+   echo "eroare"
+   else echo "Numar ok"
+fi
+for i in "${vector[@]}";
+do
+ if [[ -r $i ]]
+ then
+   echo "se poate citi $i"
+ else
+   echo "paula" > $i
+ fi
+done
+for i in "${vector[@]}";
+do
+ echo  "Numar de linii $(wc -l "$i") si numarul de cuvinte $(wc -w "$i") "
+done
+cat $@ > concat.txt
+tac concat.txt > reverseconcat.txt
+=======
+#!/bin/bash
+user=$1
+variable=$(ps -ef | awk -v patern="$user" '{if($1 ~ patern) {print $2}}')
+variablearray=($variable)
+for i in "${variablearray[@]}"
+do
+        #echo $(kill "${i}" )  # comentat sa nu omoare toate procesele
+        echo $i
+done
+echo $user
+echo $variablearray
+
+
+===
+ps aux 
+pmap -p pid
